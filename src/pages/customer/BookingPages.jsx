@@ -30,6 +30,7 @@ import { getBookings, createBooking, updateBookingStatus } from '../../api/booki
 import { createReview } from '../../api/reviews.api'
 import { getAllProviders } from '../../api/providers.api'
 import { getAllServices } from '../../api/services.api'
+import { DatePickerTime } from '@/components/ui/date-time-picer'
 
 
 const statusMeta = {
@@ -81,7 +82,7 @@ function CreateBookingModal({ onClose, onCreate }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative z-10 w-full max-w-md bg-zinc-950 border border-white/8 rounded-2xl p-6 space-y-5 shadow-2xl">
+      <div className="relative z-10 w-full max-w-md bg-zinc-950 border border-white/10 rounded-2xl p-6 space-y-5 shadow-2xl">
         
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold text-white" style={{ fontFamily: 'var(--font-display)' }}>
@@ -105,7 +106,7 @@ function CreateBookingModal({ onClose, onCreate }) {
                 value={form.providerId}
                 onValueChange={(val) => setForm((p) => ({ ...p, providerId: val }))}
               >
-                <SelectTrigger className="bg-zinc-900 border-white/10 text-white h-11 rounded-xl focus:ring-amber-400/30 focus:border-amber-400/40">
+                <SelectTrigger className="w-full bg-zinc-900 border-white/10 text-white h-11 rounded-xl focus-visible:ring-amber-400/40 focus-visable:border-amber-400/40">
                   <SelectValue placeholder="Select a provider" />
                 </SelectTrigger>
                 <SelectContent className="bg-zinc-900 border-white/10 text-white">
@@ -115,7 +116,7 @@ function CreateBookingModal({ onClose, onCreate }) {
                       <SelectItem
                         key={p.providerId}
                         value={p.providerId}
-                        className="text-white focus:bg-white/5 focus:text-white cursor-pointer"
+                        className="text-white cursor-pointer"
                       >
                         {p.firstName} {p.lastName}
                       </SelectItem>
@@ -131,7 +132,7 @@ function CreateBookingModal({ onClose, onCreate }) {
                 value={form.serviceId}
                 onValueChange={(val) => setForm((p) => ({ ...p, serviceId: val }))}
               >
-                <SelectTrigger className="bg-zinc-900 border-white/10 text-white h-11 rounded-xl focus:ring-amber-400/30 focus:border-amber-400/40">
+                <SelectTrigger className="w-full bg-zinc-900 border-white/10 text-white h-11 rounded-xl focus:ring-amber-400/30 focus:border-amber-400/40">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent className="bg-zinc-900 border-white/10 text-white">
@@ -141,7 +142,7 @@ function CreateBookingModal({ onClose, onCreate }) {
                       <SelectItem
                         key={s.services.serviceId}
                         value={s.services.serviceId}
-                        className="text-white focus:bg-white/5 focus:text-white cursor-pointer"
+                        className="text-white  focus:text-white cursor-pointer"
                       >
                         {s.services.serviceName} {s.services.servicePrice ? `— $${s.services.servicePrice}` : ''}
                       </SelectItem>
@@ -153,12 +154,7 @@ function CreateBookingModal({ onClose, onCreate }) {
 
             <div className="space-y-2">
               <Label className="text-zinc-300 text-sm">Scheduled Date & Time</Label>
-              <Input
-                type="datetime-local"
-                value={form.scheduledAt}
-                onChange={(e) => setForm((p) => ({ ...p, scheduledAt: e.target.value }))}
-                className="bg-zinc-900 border-white/10 text-white h-11 rounded-xl focus-visible:border-amber-400/40 focus-visible:ring-amber-400/30 [color-scheme:dark]"
-              />
+              <DatePickerTime form={form} setForm={setForm}/>
             </div>
 
             {error && (
