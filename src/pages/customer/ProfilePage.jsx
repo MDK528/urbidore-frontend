@@ -162,16 +162,16 @@ export default function CustomerProfilePage() {
                   setSuccess(false)
                 }}
               >
-                <SelectTrigger className="bg-zinc-900 border-white/10 text-white h-11 rounded-xl focus:ring-amber-400/30 focus:border-amber-400/40">
+                <SelectTrigger className="w-[49%] bg-zinc-900 border-white/10 text-white text-sm h-11 rounded-xl px-3  focus-visible:ring-amber-400/40 focus-visible:border-amber-400/40">
                   <SelectValue placeholder="Select gender" />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-white/10 text-white">
-                  <SelectGroup>
-                    <SelectLabel className="text-zinc-500">Gender</SelectLabel>
-                    <SelectItem value="male" className="text-white focus:bg-white/5 focus:text-white cursor-pointer">Male</SelectItem>
-                    <SelectItem value="female" className="text-white focus:bg-white/5 focus:text-white cursor-pointer">Female</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
+                  <SelectContent className="bg-zinc-900 border border-white/10 text-white">
+                    <SelectGroup>
+                      <SelectLabel className="text-zinc-500">Gender</SelectLabel>
+                      <SelectItem value="male" className="text-white cursor-pointer">Male</SelectItem>
+                      <SelectItem value="female" className="text-white cursor-pointer">Female</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
               </Select>
             </div>
 
