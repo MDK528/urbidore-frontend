@@ -6,6 +6,14 @@ export const api = axios.create({
   withCredentials: true
 })
 
+const refreshApi = axios.create({
+  baseURL:
+    import.meta.env.VITE_API_URL ||
+    'http://localhost:8000/api/v1',
+
+  withCredentials: true,
+})
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('accessToken')
   if (token) config.headers.Authorization = `Bearer ${token}`
@@ -19,7 +27,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !original._retry) {
       original._retry = true
       try {
-        const { data } = await axios.post('/api/v1/auth/refresh-accesstoken')
+        const { data } = await refreshApi.post('/auth/refresh-accesstoken')
         localStorage.setItem('accessToken', data.data.accessToken)
         original.headers.Authorization = `Bearer ${data.data.accessToken}`
         return api(original)
