@@ -8,11 +8,11 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken')
-    if (!token) {
-      setLoading(false)
-      return
-    }
+    // const token = localStorage.getItem('accessToken')
+    // if (!token) {
+    //   setLoading(false)
+    //   return
+    // }
     getMe()
       .then((res) => setUser(res.data.data))
       .catch(() => {
