@@ -8,19 +8,28 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // const token = localStorage.getItem('accessToken')
-    // if (!token) {
-    //   setLoading(false)
-    //   return
-    // }
-    getMe()
-      .then((res) => setUser(res.data.data))
-      .catch(() => {
-        localStorage.removeItem('accessToken')
-        setUser(null)
-      })
-      .finally(() => setLoading(false))
-  }, [])
+    const token =localStorage.getItem('accessToken')
+
+    const initializeAuth = async () => {
+      try {
+        if (!token) {
+          await refreshAccessToken()
+        }
+
+        const res = await getMe()
+
+        setUser(res.data.data)
+      } catch {
+          localStorage.removeItem('accessToken')
+
+          setUser(null)
+      } finally {
+          setLoading(false)
+      }
+    }
+
+    initializeAuth()
+}, [])
 
   const login = (userData, token) => {
     localStorage.setItem('accessToken', token)
