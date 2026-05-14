@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
-    if (window.location.pathname !== '/' && window.location.pathname !== '/sign-in' && window.location.pathname !== '/sign-up') {
+    if (window.location.pathname !== '/sign-in' && window.location.pathname !== '/sign-up') {
       initializeAuth()
     } else {
       setLoading(false)
