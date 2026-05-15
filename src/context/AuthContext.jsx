@@ -13,7 +13,8 @@ export const AuthProvider = ({ children }) => {
     const initializeAuth = async () => {
       try {
         if (!token) {
-          await refreshAccessToken()
+          const refreshTokenRes = await refreshAccessToken()
+          localStorage.setItem('accessToken', refreshTokenRes.data.data.accessToken)
         }
 
         const res = await getMe()
