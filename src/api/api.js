@@ -33,7 +33,7 @@ api.interceptors.response.use(
         return api(original)
       } catch {
         localStorage.removeItem('accessToken')
-        window.location.href = '/sign-in'
+        window.location.href = '/'
       }
     }
     return Promise.reject(error)
